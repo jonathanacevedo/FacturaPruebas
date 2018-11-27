@@ -1,0 +1,88 @@
+<div class="container">
+    <h1 style="padding: 20px;">Registrar Venta</h1>
+    <form>
+  
+      <div class="form-row" style="padding: 20px 0px 20px 0px;">
+        <div class="form-group col-md-6" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Nombre del establecimiento:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Establecimiento">
+        </div>
+        <div class="form-group col-md-6" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Nit:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="NIT">
+        </div>
+      </div>
+  
+      <button class="btnDetalle" (click)="agregarArticulo()" >Agregar Artículo +</button>
+      <button class="btnDetalle" (click)="retirarArticulo()" *ngIf="articulos.length!=0">-</button>
+
+  
+      <!-- Div para articulos -->
+
+      <div class="form-row" style="padding: 20px 0px 20px 0px;" *ngFor="let articulo of articulos">
+        <div style="background-color:#751836; color: #751836; text-align: center">.</div>
+        <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Codigo:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="ID">
+        </div>
+        <div class="form-group col-md-4" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Descripción del producto:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Descripción">
+        </div>
+        <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Valor:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Valor">
+        </div>
+        <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
+            <label for="exampleInputEmail1">Cantidad:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="#">
+          </div>
+          <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
+              <label for="exampleInputEmail1">IVA:</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="%">
+            </div>
+          <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
+            <label for="exampleInputEmail1">Subtotal:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subtotal">
+          </div>
+      </div>
+
+
+      <div style="border-style: dotted; padding: 10px;" *ngIf="articulos.length!=0">
+      <div class="form-row" style="padding: 20px 0px 20px 0px;" >
+          <div class="form-group col-md-3" style="width: 50%; margin: 0 auto;">
+              <label for="exampleInputEmail1">Valor IVA pagado:</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Total">
+            </div>
+            <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
+              <label for="exampleInputEmail1">Efectivo:</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Efectivo">
+            </div>
+        <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Ahorro:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ahorro">
+        </div>
+        <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Valor Pagado:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Valor Pagado">
+        </div>
+        <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Cambio:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Cambio">
+        </div>
+      </div>
+
+      <div class="form-row" style="padding: 20px 0px 20px 0px;" *ngIf="articulos.length!=0">
+        <div class="form-group col-md-2">
+          <label for="exampleInputEmail1">Total:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Total">
+        </div>
+      </div>
+    </div>
+  
+      <div style="padding: 20px;">
+        <button type="submit" class="btnDetalle" (click)="guardar()" >Guardar</button>
+        <button type="submit" class="btnDetalle">Cancelar</button>
+      </div>
+    </form>
+  </div>
