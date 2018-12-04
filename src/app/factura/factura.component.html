@@ -25,17 +25,21 @@
         <div style="background-color:#751836; color: #751836; text-align: center">.</div>
         <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
           <label for="exampleInputEmail1">Codigo:</label>
-          <input type="email" [(ngModel)]="codigo" [ngModelOptions]="{standalone: true}"
+          <input type="text" (keypress)="keyPress($event)" type="email" [(ngModel)]="articulo.codigo" (blur)="getProducto(articulo)"
+          [ngModelOptions]="{standalone: true}"
            class="form-control" id="exampleInputEmail1" placeholder="ID">
         </div>
         <div class="form-group col-md-4" style="width: 50%; margin: 0 auto;">
           <label for="exampleInputEmail1">Descripción del producto:</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Descripción">
+          <label class="form-control">{{articulo.nombre}}</label>
         </div>
         <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
           <label for="exampleInputEmail1">Valor:</label>
-          <input name=a{{index}} type="email" class="form-control" [(ngModel)]="articulo.valor" [ngModelOptions]="{standalone: true}"
+          <label class="form-control">{{articulo.valor | number}}</label>
+          <!--
+          <input name=a{{index}}  type="email" class="form-control" [(ngModel)]="articulo.valor" [ngModelOptions]="{standalone: true}"
            id="exampleInputEmail1" placeholder="Valor">
+           -->
         </div>
         <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
             <label for="exampleInputEmail1">Cantidad:</label>
@@ -43,27 +47,45 @@
             id="exampleInputEmail1" placeholder="#">
           </div>
           <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
-              <label for="exampleInputEmail1">IVA:</label>
-              <input type="email" class="form-control" [(ngModel)]="articulo.iva" [ngModelOptions]="{standalone: true}"
-               id="exampleInputEmail1" placeholder="%">
+              <label for="exampleInputEmail1">IVA%:</label>
+              <label class="form-control">{{articulo.iva}}</label>
             </div>
           <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
             <label for="exampleInputEmail1">Subtotal:</label>
-            <input type="email" class="form-control" value="{{articulo.valor*articulo.cantidad -((articulo.valor*articulo.cantidad*articulo.iva)/100)}}"
+
+            <label class="form-control">{{articulo.valor*articulo.cantidad +((articulo.valor*articulo.cantidad*articulo.iva)/100)| number}}</label>
+            <!--<input type="email" class="form-control" value="{{articulo.valor*articulo.cantidad +((articulo.valor*articulo.cantidad*articulo.iva)/100)}}"
              [(ngModel)]="articulo.subtotal" [ngModelOptions]="{standalone: true}"
-             id="exampleInputEmail1" placeholder="Subtotal">
+             id="exampleInputEmail1" placeholder="Subtotal">-->
           </div>
       </div>
 
+      <div (click)="validarDatos()" style="cursor: pointer; width: 25%; margin: 0 auto;" *ngIf="articulos.length!=0">
+      <img src="../../assets/imagenes/check.png" 
+      alt="imagen">
+      Listo!
+
+      </div>
+      <br>
 
       <div style="border-style: dotted; padding: 10px;" *ngIf="articulos.length!=0">
       <div class="form-row" style="padding: 20px 0px 20px 0px;" >
+
+        <div class="form-group col-md-3" style="width: 50%; margin: 0 auto;">
+          <label for="exampleInputEmail1">Valor IVA pagado:</label>
+          <label class="form-control"
+          id="exampleInputEmail1">{{ivaPagado | number}}</label>
+        </div>
+
+        <!--
           <div class="form-group col-md-3" style="width: 50%; margin: 0 auto;">
               <label for="exampleInputEmail1">Valor IVA pagado:</label>
               <input type="email" class="form-control"
               [(ngModel)]="ivaPagado" [ngModelOptions]="{standalone: true}"
               id="exampleInputEmail1" placeholder="Total">
             </div>
+
+            -->
             <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
               <label for="exampleInputEmail1">Efectivo:</label>
               <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Efectivo">
@@ -82,27 +104,34 @@
         </div>
         <div class="form-group col-md-2" style="width: 50%; margin: 0 auto;">
           <label for="exampleInputEmail1">Cambio:</label>
+
+          <label class="form-control">{{valorPagado - totalPagar+ahorro*1 | number}}</label>
+          
+          <!--
           <input type="email" class="form-control" id="exampleInputEmail1"
           value="{{valorPagado - totalPagar+ahorro*1}}"
           [(ngModel)]="cambio" [ngModelOptions]="{standalone: true}"
           placeholder="Cambio">
+            -->
+
         </div>
       </div>
-
       <div class="form-row" style="padding: 20px 0px 20px 0px;" *ngIf="articulos.length!=0">
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
           <label for="exampleInputEmail1">Total:</label>
+          <label class="form-control">{{totalPagar-ahorro*1 | number}}</label>
+          <!--
           <input type="email" class="form-control" id="exampleInputEmail1"
           value="{{totalPagar - ahorro}}"
           [(ngModel)]="totalPagar" [ngModelOptions]="{standalone: true}"
           placeholder="Total">
+          -->
         </div>
       </div>
     </div>
   
       <div style="padding: 20px;">
-        <button type="submit" class="btnDetalle" (click)="guardar()" >Guardar</button>
-        <button class="btnDetalle" (click)="validarDatos()" >Listo</button>
+        <button type="submit" class="btnDetalle" (click)="guardar()" [disabled]="!articulos.length!=0" >Guardar</button>
         <button class="btnDetalle">Cancelar</button>
       </div>
     </form>
