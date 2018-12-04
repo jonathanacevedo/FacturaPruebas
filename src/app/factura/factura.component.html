@@ -43,7 +43,7 @@
         </div>
         <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
             <label for="exampleInputEmail1">Cantidad:</label>
-            <input type="email" class="form-control" [(ngModel)]="articulo.cantidad" [ngModelOptions]="{standalone: true}"
+            <input (keypress)="keyPress($event)" type="email" class="form-control" [(ngModel)]="articulo.cantidad" [ngModelOptions]="{standalone: true}"
             id="exampleInputEmail1" placeholder="#">
           </div>
           <div class="form-group col-md-1" style="width: 50%; margin: 0 auto;">
